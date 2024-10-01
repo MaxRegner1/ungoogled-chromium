@@ -13,11 +13,11 @@ jobs:
     steps:
       - name: Create Release
         id: create_release
-        uses: softprops/action-gh-release@v1  # Alternative action for creating GitHub releases
+        uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref_name }}  # Extracts tag name
-          release_name: ${{ github.ref_name }}  # Uses the tag name for release
+          tag_name: ${{ github.ref_name }}  # Extracts the tag name
+          name: ${{ github.ref_name }}  # Uses the tag name for the release name
           draft: false
           prerelease: false
