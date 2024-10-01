@@ -3,8 +3,8 @@ name: Create new empty release
 on:
   push:
     tags:
-      - '*'
-  workflow_dispatch: # Add this to enable manual triggering
+      - '*'  # Only trigger on tag pushes
+  workflow_dispatch:  # For manual trigger
 
 jobs:
   build:
@@ -17,7 +17,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
+          tag_name: ${{ github.ref_name }}  # This extracts the tag name from the ref
+          release_name: ${{ github.ref_name }}  # Use the tag name for the release name
           draft: false
           prerelease: false
