@@ -3,8 +3,8 @@ name: Create new empty release
 on:
   push:
     tags:
-      - '*'  # Only trigger on tag pushes
-  workflow_dispatch:  # For manual trigger
+      - '*'  # Trigger on tag pushes
+  workflow_dispatch:  # Allow manual trigger
 
 jobs:
   build:
@@ -13,11 +13,11 @@ jobs:
     steps:
       - name: Create Release
         id: create_release
-        uses: actions/create-release@latest
+        uses: softprops/action-gh-release@v1  # Alternative action for creating GitHub releases
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref_name }}  # This extracts the tag name from the ref
-          release_name: ${{ github.ref_name }}  # Use the tag name for the release name
+          tag_name: ${{ github.ref_name }}  # Extracts tag name
+          release_name: ${{ github.ref_name }}  # Uses the tag name for release
           draft: false
           prerelease: false
